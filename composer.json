@@ -1,0 +1,20 @@
+{
+    "name": "ycstar\/obpmini",
+    "description": "平安银行小程序SDK",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ycstar",
+            "email": "547098838@qq.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.5",
+        "lpilp/guomi": "1.0.4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ycstar\\Obpmini\\": "src"
+        }
+    }
+}
