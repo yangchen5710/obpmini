@@ -100,7 +100,6 @@ class Base
     {
         list($msec, $sec) = explode(' ', microtime());
         $msectime = (string) sprintf('%.0f', (floatval($msec) + floatval($sec)) * 1000);
-
         return $msectime;
     }
 
@@ -110,11 +109,8 @@ class Base
     private function setBizContent($data)
     {
         $jsonParam = json_encode($data, JSON_HEX_QUOT);
-
         $sm4 = new RtSm4(hex2bin($this->config->get('secret_key')));
-
         $rs = $sm4->encrypt($jsonParam, 'sm4-ecb', '', 'base64');
-
         return $rs;
     }
 
@@ -162,7 +158,6 @@ class Base
                 $i++;
             }
         }
-
         unset($k, $v);
         return $stringToBeSigned;
     }
