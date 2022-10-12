@@ -90,7 +90,7 @@ class Base
         if ($result['responseCode'] != '000000') {
             throw new InvalidArgumentException($result['responseMsg']);
         }
-        return $result['data'];
+        return $result;
     }
 
     /**
