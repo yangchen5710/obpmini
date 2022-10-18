@@ -83,4 +83,9 @@ trait Order
     {
         return $this->callPostApi($this->miniAppUrl, 'obp-api-ibank-pay.cancelPrepay', $params);
     }
+
+    public function smallPayQrySignByOpenId(array $params)
+    {
+        return $this->callPostApi($this->miniAppUrl, 'smallPay.qrySignByOpenId', $params);
+    }
 }
