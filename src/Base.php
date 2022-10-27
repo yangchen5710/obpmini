@@ -6,7 +6,6 @@ namespace Ycstar\Obpmini;
 
 use Rtgm\sm\RtSm2;
 use Rtgm\sm\RtSm4;
-use GuzzleHttp\Client;
 use Ycstar\Obpmini\Exceptions\InvalidArgumentException;
 
 class Base
@@ -70,8 +69,7 @@ class Base
         $sign = $this->setSign($params);
         $params['sign'] = $sign;
         ksort($params);
-        $client = new Client();
-        $response = $client->post($url, ['json' => $params])->getBody()->getContents();
+        $response = $this->post($url, $params);
         $rs = json_decode($response, true);
         if (isset($rs['responseCode']) && $rs['responseCode'] != '000000') {
             throw new InvalidArgumentException($rs['responseMsg']);
@@ -191,5 +189,21 @@ class Base
             }
         }
         return $data;
+    }
+
+    private function post($url, $params)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        //curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+        curl_setopt($ch, CURLOPT_POST, true);           //POST方式
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);    //POST数据
+        $result = curl_exec($ch);
+        //$info = curl_getinfo($ch);
+        curl_close($ch);
+        return $result;
     }
 }
