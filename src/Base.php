@@ -193,6 +193,7 @@ class Base
 
     private function post($url, $params)
     {
+        $data = json_encode($params);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
@@ -200,7 +201,14 @@ class Base
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         //curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
         curl_setopt($ch, CURLOPT_POST, true);           //POST方式
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);    //POST数据
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);    //POST数据
+        curl_setopt(
+            $ch,
+            CURLOPT_HTTPHEADER,
+            [
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data)]
+        );
         $result = curl_exec($ch);
         //$info = curl_getinfo($ch);
         curl_close($ch);
