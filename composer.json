@@ -9,7 +9,8 @@
         }
     ],
     "require": {
-        "lpilp/guomi": "1.0.4.1"
+        "lpilp/guomi": "1.0.4.1",
+        "ext-curl": "*"
     },
     "autoload": {
         "psr-4": {

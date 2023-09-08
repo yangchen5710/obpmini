@@ -88,4 +88,9 @@ trait Order
     {
         return $this->callPostApi($this->miniAppUrl, 'smallPay.qrySignByOpenId', $params);
     }
+
+    public function smallPayQueryPayOrderInfo(array $params)
+    {
+        return $this->callPostApi($this->miniAppUrl, 'smallPay.queryPayOrderInfo', $params);
+    }
 }
